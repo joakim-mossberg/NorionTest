@@ -1,3 +1,5 @@
-﻿namespace VehicleTollApi.Application.Vehicles.Queries.Handlers;
+﻿using MediatR;
 
-public record GetAllVehiclesQuery();
+namespace VehicleTollApi.Application.Vehicles.Queries.Handlers;
+
+public record GetAllVehiclesQuery() : IRequest<IEnumerable<GetVehicleDto>>;

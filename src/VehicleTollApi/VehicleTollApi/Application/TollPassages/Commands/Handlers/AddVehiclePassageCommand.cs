@@ -1,3 +1,5 @@
-﻿namespace VehicleTollApi.Application.TollPassages.Commands.Handlers;
+﻿using MediatR;
 
-public record AddVehiclePassageCommand(string LicensePlateNumber);
+namespace VehicleTollApi.Application.TollPassages.Commands.Handlers;
+
+public record AddVehiclePassageCommand(string LicensePlateNumber) : IRequest<AddVehiclePassageDto>;

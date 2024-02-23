@@ -10,6 +10,6 @@ public class RepositoryContext : DbContext
     {
     }
 
-    DbSet<VehicleOwner> VehicleOwners { get; set; }
-    DbSet<Vehicle> Vehicles { get; set; }
+    public DbSet<VehicleOwner> VehicleOwners { get; set; }
+    public DbSet<Vehicle> Vehicles { get; set; }
 }

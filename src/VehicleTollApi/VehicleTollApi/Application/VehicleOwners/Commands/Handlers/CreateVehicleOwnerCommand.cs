@@ -1,3 +1,5 @@
-﻿namespace VehicleTollApi.Application.VehicleOwners.Commands.Handlers;
+﻿using MediatR;
 
-public record CreateVehicleOwnerCommand(string FirstName, string LastName);
+namespace VehicleTollApi.Application.VehicleOwners.Commands.Handlers;
+
+public record CreateVehicleOwnerCommand(string FirstName, string LastName) : IRequest<CreateVehicleOwnerDto>;

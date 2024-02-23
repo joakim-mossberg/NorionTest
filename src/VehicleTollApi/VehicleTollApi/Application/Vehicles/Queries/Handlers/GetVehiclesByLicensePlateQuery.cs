@@ -1,3 +1,5 @@
-﻿namespace VehicleTollApi.Application.Vehicles.Queries.Handlers;
+﻿using MediatR;
 
-public record GetVehiclesByLicensePlateQuery(string LicensePlateNumber);
+namespace VehicleTollApi.Application.Vehicles.Queries.Handlers;
+
+public record GetVehiclesByLicensePlateQuery(string LicensePlateNumber) : IRequest<GetVehicleDto>;

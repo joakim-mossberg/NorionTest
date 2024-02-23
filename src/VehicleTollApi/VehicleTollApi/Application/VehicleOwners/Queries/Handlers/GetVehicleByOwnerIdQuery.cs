@@ -1,3 +1,5 @@
-﻿namespace VehicleTollApi.Application.VehicleOwners.Queries.Handlers;
+﻿using MediatR;
 
-public record GetVehicleByOwnerIdQuery(Guid Id);
+namespace VehicleTollApi.Application.VehicleOwners.Queries.Handlers;
+
+public record GetVehicleByOwnerIdQuery(Guid Id) : IRequest<GetVehicleOwnerDto>;

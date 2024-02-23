@@ -31,7 +31,7 @@ public class VehiclesController : ControllerBase
     [HttpPost("newvehicle")]
     public async Task<IActionResult> CreateVehicle(Guid owner, string licensePlate, VehicleKind vehicleKind)
     {
-        var result = await _mediator.Send(new GetVehiclesByLicensePlateCommand(owner, licensePlate, vehicleKind));
+        var result = await _mediator.Send(new CreateVehicleCommand(owner, licensePlate, vehicleKind));
         var newVehicle = new VehicleDTO(owner, licensePlate, vehicleKind);
         return CreatedAtAction(nameof(CreateVehicle), new { licensePlateNumber = newVehicle.LicensePlate }, new { Id = newVehicle.LicensePlate, newVehicle });
     }

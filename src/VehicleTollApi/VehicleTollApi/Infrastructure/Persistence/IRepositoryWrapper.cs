@@ -2,8 +2,8 @@
 
 namespace VehicleTollApi.Infrastructure.Persistence;
 
-public class IRepositoryWrapper
+public interface IRepositoryWrapper
 {
-    IVehicleOwnerRepository? VehicleOwner { get; }
-    IVehicleRepository? Vehicle { get; }
+    IVehicleOwnerRepository VehicleOwner { get; }
+    IVehicleRepository Vehicle { get; }
 }
