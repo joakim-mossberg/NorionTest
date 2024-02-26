@@ -15,23 +15,23 @@ public class VehicleOwnersController : ControllerBase
     public VehicleOwnersController(IMediator mediator) => _mediator = mediator;
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<VehicleOwnerDTO>>> GetAllVehicleOwners()
+    public async Task<ActionResult<IEnumerable<VehicleOwnerDTO>>> GetAllVehicleOwners(CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new GetAllVehicleOwnersQuery());
+        var result = await _mediator.Send(new GetAllVehicleOwnersQuery(), cancellationToken);
         return Ok(result);
     }
 
-    [HttpGet("id")]
-    public async Task<ActionResult<VehicleOwnerDTO>> GetVehicleOwnerById(Guid id)
-    {
-        var result = await _mediator.Send(new GetVehicleByOwnerIdQuery(id));
-        return Ok(result);
-    }
+    //[HttpGet("id")]
+    //public async Task<ActionResult<VehicleOwnerDTO>> GetVehicleOwnerById(Guid id, CancellationToken cancellationToken)
+    //{
+    //    var result = await _mediator.Send(new GetVehicleByOwnerIdQuery(id), cancellationToken);
+    //    return Ok(result);
+    //}
 
     [HttpPost("newowner")]
-    public async Task<IActionResult> CreateVehicleOwner(string firstName, string lastName)
+    public async Task<IActionResult> CreateVehicleOwner([FromBody]VehicleOwnerDTO vehicleOwner, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new CreateVehicleOwnerCommand(firstName, lastName));
+        var result = await _mediator.Send(new CreateVehicleOwnerCommand(vehicleOwner.FirstName, vehicleOwner.LastName), cancellationToken);
         return Ok(result);
     }
 }

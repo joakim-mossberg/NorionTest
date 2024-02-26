@@ -4,8 +4,8 @@ using VehicleTollApi.Infrastructure.Persistence.RepositoryInterfaces;
 
 namespace VehicleTollApi.Infrastructure.Persistence.Repositories;
 
-public class VehicleOwnerRepository : RepositoryBase<VehicleOwner>, IVehicleOwnerRepository
+public class VehiclePassageRepository : RepositoryBase<VehiclePassage>, IVehiclePassageRepository
 {
-    public VehicleOwnerRepository(VehicleTollContext repositoryContext)
-            : base(repositoryContext) { }
+    public VehiclePassageRepository(VehicleTollContext repositoryContext) 
+        : base(repositoryContext) { }
 }

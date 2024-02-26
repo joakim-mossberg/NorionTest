@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using VehicleTollApi.Infrastructure.Persistence.Data;
 using VehicleTollApi.Infrastructure.Persistence.RepositoryInterfaces;
 
 namespace VehicleTollApi.Infrastructure.Persistence.Repositories;
 
 public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
 {
-    protected RepositoryContext RepositoryContext { get; set; }
-    public RepositoryBase(RepositoryContext repositoryContext)
+    protected VehicleTollContext RepositoryContext { get; set; }
+    public RepositoryBase(VehicleTollContext repositoryContext)
     {
         RepositoryContext = repositoryContext;
     }

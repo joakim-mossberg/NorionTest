@@ -1,13 +1,15 @@
-﻿using VehicleTollApi.Infrastructure.Persistence.Repositories;
+﻿using VehicleTollApi.Infrastructure.Persistence.Data;
+using VehicleTollApi.Infrastructure.Persistence.Repositories;
 using VehicleTollApi.Infrastructure.Persistence.RepositoryInterfaces;
 
 namespace VehicleTollApi.Infrastructure.Persistence;
 
 public class RepositoryWrapper : IRepositoryWrapper
 {
-    private RepositoryContext _repoContext;
+    private VehicleTollContext _repoContext;
     private IVehicleOwnerRepository? _vehicleOwner;
     private IVehicleRepository? _vehicle;
+    private IVehiclePassageRepository? _vehiclePassage;
 
     public IVehicleOwnerRepository VehicleOwner
     {
@@ -33,7 +35,19 @@ public class RepositoryWrapper : IRepositoryWrapper
         }
     }
 
-    public RepositoryWrapper(RepositoryContext repositoryContext)
+    public IVehiclePassageRepository VehiclePassage
+    {
+        get
+        {
+            if (_vehiclePassage == null)
+            {
+                _vehiclePassage = new VehiclePassageRepository(_repoContext);
+            }
+            return _vehiclePassage;
+        }
+    }
+
+    public RepositoryWrapper(VehicleTollContext repositoryContext)
     {
         _repoContext = repositoryContext;
     }

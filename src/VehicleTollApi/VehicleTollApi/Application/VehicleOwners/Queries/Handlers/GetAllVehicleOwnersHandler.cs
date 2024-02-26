@@ -1,23 +1,35 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using VehicleTollApi.Application.VehicleOwners.Mappings;
 using VehicleTollApi.Infrastructure.Persistence;
+using VehicleTollApi.Shared;
 
 namespace VehicleTollApi.Application.VehicleOwners.Queries.Handlers;
 
-public class GetAllVehicleOwnersHandler : IRequestHandler<GetAllVehicleOwnersQuery, IEnumerable<GetVehicleOwnerDto>>
+public class GetAllVehicleOwnersHandler : IRequestHandler<GetAllVehicleOwnersQuery, Response<IEnumerable<GetVehicleOwnerDto>>>
 {
     private IRepositoryWrapper _repositoryWrapper;
+    private IValidator<GetAllVehicleOwnersQuery> _validator;
 
-    public GetAllVehicleOwnersHandler(IRepositoryWrapper repositoryWrapper)
+    public GetAllVehicleOwnersHandler(IRepositoryWrapper repositoryWrapper,
+        IValidator<GetAllVehicleOwnersQuery> validator)
     {
         _repositoryWrapper = repositoryWrapper;
+        _validator = validator;
     }
 
-    public async Task<IEnumerable<GetVehicleOwnerDto>> Handle(GetAllVehicleOwnersQuery request, CancellationToken cancellationToken)
+    public async Task<Response<IEnumerable<GetVehicleOwnerDto>>> Handle(GetAllVehicleOwnersQuery request, CancellationToken cancellationToken)
     {
-        var result = await _repositoryWrapper.Vehicle.FindAll()
-                .ToListAsync(cancellationToken: cancellationToken);
+        var validateResult = await _validator.ValidateAsync(request, cancellationToken);
+        if (!validateResult.IsValid)
+        {
+            return new Response<IEnumerable<GetVehicleOwnerDto>>(null!, validateResult.Errors);
+        }
 
-        return result.Select(vehicle => new GetVehicleOwnerDto()).ToList();
+        var result = await _repositoryWrapper.VehicleOwner.FindAll()
+                .ToListAsync(cancellationToken);
+
+        return new Response<IEnumerable<GetVehicleOwnerDto>>(result.Select(owner => owner.AsDto()).ToList());
     }
 }

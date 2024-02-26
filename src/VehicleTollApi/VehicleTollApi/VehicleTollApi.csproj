@@ -1,26 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="11.9.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+            <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.2" />
+            <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
+              <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+              <PrivateAssets>all</PrivateAssets>
+            </PackageReference>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Application\TollPassages\Commands\Validators\" />
-    <Folder Include="Application\TollPassages\Queries\Handlers\" />
-    <Folder Include="Application\TollPassages\Queries\Validators\" />
-    <Folder Include="Application\VehicleOwners\Commands\Validators\" />
-    <Folder Include="Application\VehicleOwners\Queries\Validators\" />
-    <Folder Include="Application\Vehicles\Commands\Validators\" />
-    <Folder Include="Application\Vehicles\Queries\Validators\" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Application\TollPassages\Queries\Handlers\" />
+        <Folder Include="Application\TollPassages\Queries\Validators\" />
+        <Folder Include="Application\VehicleOwners\Commands\Validators\" />
+        <Folder Include="Application\VehicleOwners\Queries\Validators\" />
+        <Folder Include="Application\Vehicles\Commands\Validators\" />
+        <Folder Include="Application\Vehicles\Queries\Validators\" />
+        <Folder Include="Migrations\" />
+        <Folder Include="Database\" />
+    </ItemGroup>
 
 </Project>

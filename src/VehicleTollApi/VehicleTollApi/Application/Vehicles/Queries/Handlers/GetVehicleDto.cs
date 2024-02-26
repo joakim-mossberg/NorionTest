@@ -1,4 +1,4 @@
 ﻿
 namespace VehicleTollApi.Application.Vehicles.Queries.Handlers;
 
-public record GetVehicleDto();
+public record GetVehicleDto(string LicensePlateNumber);

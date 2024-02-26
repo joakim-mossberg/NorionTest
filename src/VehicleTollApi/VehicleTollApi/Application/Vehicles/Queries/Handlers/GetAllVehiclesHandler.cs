@@ -1,10 +1,12 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using VehicleTollApi.Infrastructure.Persistence;
+using VehicleTollApi.Shared;
+using VehicleTollApi.WebApi.Models;
 
 namespace VehicleTollApi.Application.Vehicles.Queries.Handlers;
 
-public class GetAllVehiclesHandler : IRequestHandler<GetAllVehiclesQuery, IEnumerable<GetVehicleDto>>
+public class GetAllVehiclesHandler : IRequestHandler<GetAllVehiclesQuery, Response<IEnumerable<GetVehicleDto>>>
 {
     private IRepositoryWrapper _repositoryWrapper;
 
@@ -13,11 +15,11 @@ public class GetAllVehiclesHandler : IRequestHandler<GetAllVehiclesQuery, IEnume
         _repositoryWrapper = repositoryWrapper;
     }
 
-    public async Task<IEnumerable<GetVehicleDto>> Handle(GetAllVehiclesQuery request, CancellationToken cancellationToken)
+    public async Task<Response<IEnumerable<GetVehicleDto>>> Handle(GetAllVehiclesQuery request, CancellationToken cancellationToken)
     {
         var result = await _repositoryWrapper.Vehicle.FindAll()
-            .ToListAsync(cancellationToken: cancellationToken);
+            .ToListAsync(cancellationToken);
 
-        return result.Select(vehicle => new GetVehicleDto()).ToList();
+        return new Response<IEnumerable<GetVehicleDto>>(result.Select(vehicle => new GetVehicleDto(vehicle.LicensePlateNumber)).ToList());
     }
 }

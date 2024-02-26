@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using VehicleTollApi.Infrastructure.Persistence;
+using VehicleTollApi.Shared;
 
 namespace VehicleTollApi.Application.VehicleOwners.Commands.Handlers;
 
-public class CreateVehicleOwnerHandler : IRequestHandler<CreateVehicleOwnerCommand, CreateVehicleOwnerDto>
+public class CreateVehicleOwnerHandler : IRequestHandler<CreateVehicleOwnerCommand, Response<CreateVehicleOwnerDto>>
 {
     private IRepositoryWrapper _repositoryWrapper;
 
@@ -12,7 +13,7 @@ public class CreateVehicleOwnerHandler : IRequestHandler<CreateVehicleOwnerComma
         _repositoryWrapper = repositoryWrapper;
     }
 
-    public async Task<CreateVehicleOwnerDto> Handle(CreateVehicleOwnerCommand request, CancellationToken cancellationToken)
+    public async Task<Response<CreateVehicleOwnerDto>> Handle(CreateVehicleOwnerCommand request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
+using VehicleTollApi.Shared;
 using VehicleTollApi.WebApi.Models;
 
 namespace VehicleTollApi.Application.Vehicles.Commands.Handlers;
 
-public record CreateVehicleCommand(Guid ownerId, string LicencePlateNumber, VehicleKind VehicleKind) : IRequest<CreateVehicleDto>;
+public record CreateVehicleCommand(Guid OwnerId, string LicencePlateNumber, VehicleKind VehicleKind) : IRequest<Response<CreateVehicleDto>>;

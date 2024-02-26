@@ -6,4 +6,5 @@ public interface IRepositoryWrapper
 {
     IVehicleOwnerRepository VehicleOwner { get; }
     IVehicleRepository Vehicle { get; }
+    IVehiclePassageRepository VehiclePassage { get; }
 }

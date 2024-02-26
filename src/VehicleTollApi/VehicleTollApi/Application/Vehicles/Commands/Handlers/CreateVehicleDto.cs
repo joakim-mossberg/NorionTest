@@ -1,6 +1,5 @@
-﻿namespace VehicleTollApi.Application.Vehicles.Commands.Handlers
-{
-    public class CreateVehicleDto
-    {
-    }
-}
+﻿using System.Reflection.Metadata;
+
+namespace VehicleTollApi.Application.Vehicles.Commands.Handlers;
+
+public record CreateVehicleDto(Guid Id, Guid OwnerId, string LicensePlateNumber);

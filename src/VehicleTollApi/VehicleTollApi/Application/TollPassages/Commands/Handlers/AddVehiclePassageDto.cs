@@ -1,3 +1,3 @@
 ﻿namespace VehicleTollApi.Application.TollPassages.Commands.Handlers;
 
-public record AddVehiclePassageDto();
+public record AddVehiclePassageDto(string LicensePlateNumber);
