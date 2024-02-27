@@ -11,4 +11,5 @@ public class VehicleOwner
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;
     public ICollection<Vehicle>? Vehicles { get; }
+    public ICollection<VehiclePassageInvoice>? VehiclePassageInvoices { get; }
 }

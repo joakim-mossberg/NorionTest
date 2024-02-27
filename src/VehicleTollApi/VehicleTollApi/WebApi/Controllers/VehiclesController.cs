@@ -16,7 +16,7 @@ public class VehiclesController : ControllerBase
     public VehiclesController(IMediator mediator) => _mediator = mediator;
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<VehicleDTO>>> GetAllVehicles()
+    public async Task<IActionResult> GetAllVehicles()
     {
         var result = await _mediator.Send(new GetAllVehiclesQuery());
         if (!result.IsValidResponse)
@@ -27,7 +27,7 @@ public class VehiclesController : ControllerBase
     }
 
     [HttpGet("licenseplatenumber")]
-    public async Task<ActionResult<VehicleDTO>> GetVehicleByLicensePlate(string licensePlateNumber, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetVehicleByLicensePlate(string licensePlateNumber, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new GetVehiclesByLicensePlateQuery(licensePlateNumber), cancellationToken);
         if (!result.IsValidResponse)

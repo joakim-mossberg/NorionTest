@@ -15,7 +15,7 @@ public class VehicleOwnersController : ControllerBase
     public VehicleOwnersController(IMediator mediator) => _mediator = mediator;
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<VehicleOwnerDTO>>> GetAllVehicleOwners(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAllVehicleOwners(CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new GetAllVehicleOwnersQuery(), cancellationToken);
         if (!result.IsValidResponse)

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VehicleTollApi.Application.TollPassages.Commands.Handlers;
 using VehicleTollApi.Application.TollPassages.Queries.Handlers;

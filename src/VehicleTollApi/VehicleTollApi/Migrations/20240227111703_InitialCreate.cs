@@ -25,19 +25,6 @@ namespace VehicleTollApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VehiclePassageInvoice",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Amount = table.Column<decimal>(type: "TEXT", nullable: true),
-                    InvoiceDateTime = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VehiclePassageInvoice", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Vehicle",
                 columns: table => new
                 {
@@ -55,6 +42,25 @@ namespace VehicleTollApi.Migrations
                         principalTable: "VehicleOwner",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VehiclePassageInvoice",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Amount = table.Column<decimal>(type: "TEXT", nullable: true),
+                    InvoiceDateTime = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    VehicleOwnerId = table.Column<Guid>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VehiclePassageInvoice", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VehiclePassageInvoice_VehicleOwner_VehicleOwnerId",
+                        column: x => x.VehicleOwnerId,
+                        principalTable: "VehicleOwner",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -86,6 +92,11 @@ namespace VehicleTollApi.Migrations
                 name: "IX_VehiclePassage_VehiclePassageInvoiceId",
                 table: "VehiclePassage",
                 column: "VehiclePassageInvoiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VehiclePassageInvoice_VehicleOwnerId",
+                table: "VehiclePassageInvoice",
+                column: "VehicleOwnerId");
         }
 
         /// <inheritdoc />
@@ -98,10 +109,10 @@ namespace VehicleTollApi.Migrations
                 name: "VehiclePassage");
 
             migrationBuilder.DropTable(
-                name: "VehicleOwner");
+                name: "VehiclePassageInvoice");
 
             migrationBuilder.DropTable(
-                name: "VehiclePassageInvoice");
+                name: "VehicleOwner");
         }
     }
 }

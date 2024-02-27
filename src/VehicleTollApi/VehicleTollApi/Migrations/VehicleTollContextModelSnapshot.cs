@@ -93,7 +93,12 @@ namespace VehicleTollApi.Migrations
                     b.Property<DateTimeOffset>("InvoiceDateTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("VehicleOwnerId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VehicleOwnerId");
 
                     b.ToTable("VehiclePassageInvoice");
                 });
@@ -120,8 +125,17 @@ namespace VehicleTollApi.Migrations
                     b.Navigation("VehiclePassageInvoice");
                 });
 
+            modelBuilder.Entity("VehicleTollApi.Infrastructure.Persistence.Models.VehiclePassageInvoice", b =>
+                {
+                    b.HasOne("VehicleTollApi.Infrastructure.Persistence.Models.VehicleOwner", null)
+                        .WithMany("VehiclePassageInvoices")
+                        .HasForeignKey("VehicleOwnerId");
+                });
+
             modelBuilder.Entity("VehicleTollApi.Infrastructure.Persistence.Models.VehicleOwner", b =>
                 {
+                    b.Navigation("VehiclePassageInvoices");
+
                     b.Navigation("Vehicles");
                 });
 
