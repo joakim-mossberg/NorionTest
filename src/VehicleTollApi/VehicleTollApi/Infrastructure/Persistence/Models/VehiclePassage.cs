@@ -8,4 +8,6 @@ public class VehiclePassage
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
     public string? LicensePlateNumber { get; set; }
+    public DateTimeOffset PassageDateTime { get; set; }
+    public VehiclePassageInvoice? VehiclePassageInvoice { get; set; }
 }

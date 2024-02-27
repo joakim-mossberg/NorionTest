@@ -1,3 +1,3 @@
 ﻿namespace VehicleTollApi.Application.VehicleOwners.Commands.Handlers;
 
-public record CreateVehicleOwnerDto();
+public record CreateVehicleOwnerDto(Guid Id, string FirstName, string LastName);

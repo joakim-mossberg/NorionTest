@@ -21,13 +21,6 @@ public class VehicleOwnersController : ControllerBase
         return Ok(result);
     }
 
-    //[HttpGet("id")]
-    //public async Task<ActionResult<VehicleOwnerDTO>> GetVehicleOwnerById(Guid id, CancellationToken cancellationToken)
-    //{
-    //    var result = await _mediator.Send(new GetVehicleByOwnerIdQuery(id), cancellationToken);
-    //    return Ok(result);
-    //}
-
     [HttpPost("newowner")]
     public async Task<IActionResult> CreateVehicleOwner([FromBody]VehicleOwnerDTO vehicleOwner, CancellationToken cancellationToken)
     {

@@ -27,7 +27,7 @@ public class AddVehiclePassageHandler : IRequestHandler<AddVehiclePassageCommand
             return new Response<AddVehiclePassageDto>(null!, validateResult.Errors);
         }
 
-        var newVehiclePassage = request.AsVehiclePassage();
+        var newVehiclePassage = request.AsModel();
         _repositoryWrapper.VehiclePassage.Create(newVehiclePassage);
 
         return new Response<AddVehiclePassageDto>(newVehiclePassage.AsDto());

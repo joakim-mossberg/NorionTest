@@ -10,6 +10,7 @@ public class RepositoryWrapper : IRepositoryWrapper
     private IVehicleOwnerRepository? _vehicleOwner;
     private IVehicleRepository? _vehicle;
     private IVehiclePassageRepository? _vehiclePassage;
+    private IVehiclePassageInvoiceRepository? _vehiclePassageInvoice;
 
     public IVehicleOwnerRepository VehicleOwner
     {
@@ -44,6 +45,18 @@ public class RepositoryWrapper : IRepositoryWrapper
                 _vehiclePassage = new VehiclePassageRepository(_repoContext);
             }
             return _vehiclePassage;
+        }
+    }
+
+    public IVehiclePassageInvoiceRepository VehiclePassageInvoice
+    {
+        get
+        {
+            if (_vehiclePassageInvoice == null)
+            {
+                _vehiclePassageInvoice = new VehiclePassageInvoiceRepository(_repoContext);
+            }
+            return _vehiclePassageInvoice;
         }
     }
 

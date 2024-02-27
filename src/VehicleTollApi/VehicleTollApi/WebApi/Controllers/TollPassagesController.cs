@@ -17,7 +17,7 @@ public class TollPassagesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> VehiclePassage([FromBody]VehiclePassageDTO vehiclePassage, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new AddVehiclePassageCommand(vehiclePassage.LicensePlateNumber), cancellationToken);
+        var result = await _mediator.Send(new AddVehiclePassageCommand(vehiclePassage.LicensePlateNumber, DateTimeOffset.Now), cancellationToken);
         if(!result.IsValidResponse)
         {
             return BadRequest(result.Errors);

@@ -6,11 +6,12 @@ namespace VehicleTollApi.Application.TollPassages.Mappings;
 
 public static class VehiclePassageMappings
 {
-    public static VehiclePassage AsVehiclePassage(this AddVehiclePassageCommand vehiclePassageDto)
+    public static VehiclePassage AsModel(this AddVehiclePassageCommand vehiclePassageCommand)
     {
         return new VehiclePassage()
         {
-            LicensePlateNumber = vehiclePassageDto.LicensePlateNumber,
+            LicensePlateNumber = vehiclePassageCommand.LicensePlateNumber,
+            PassageDateTime = vehiclePassageCommand.PassageDateTime,
         };
     }
 
@@ -20,6 +21,6 @@ public static class VehiclePassageMappings
         {
             return null!;
         }
-        return new AddVehiclePassageDto(vehiclePassage.LicensePlateNumber!);    
+        return new AddVehiclePassageDto(vehiclePassage.LicensePlateNumber!, vehiclePassage.PassageDateTime);    
     }
 }
