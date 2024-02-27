@@ -15,11 +15,17 @@ public class GetAllVehiclesHandler : IRequestHandler<GetAllVehiclesQuery, Respon
         _repositoryWrapper = repositoryWrapper;
     }
 
-    public async Task<Response<IEnumerable<GetVehicleDto>>> Handle(GetAllVehiclesQuery request, CancellationToken cancellationToken)
+    public async Task<Response<IEnumerable<GetVehicleDto>>> Handle(GetAllVehiclesQuery request,
+                                                                   CancellationToken cancellationToken)
     {
         var result = await _repositoryWrapper.Vehicle.FindAll()
             .ToListAsync(cancellationToken);
 
-        return new Response<IEnumerable<GetVehicleDto>>(result.Select(vehicle => new GetVehicleDto(vehicle.LicensePlateNumber)).ToList());
+        return new Response<IEnumerable<GetVehicleDto>>(
+            result.Select(vehicle => new GetVehicleDto(vehicle.Id,
+                                                        vehicle.VehicleOwnerId,
+                                                        vehicle.LicensePlateNumber,
+                                                        vehicle.VehicleKind))
+            .ToList());
     }
 }

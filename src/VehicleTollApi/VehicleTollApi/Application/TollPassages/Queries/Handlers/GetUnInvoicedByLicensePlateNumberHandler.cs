@@ -28,6 +28,7 @@ public class GetUnInvoicedByLicensePlateNumberHandler : IRequestHandler<GetUnInv
 
         var uninvoicedPassages = _repositoryWrapper.VehiclePassage
             .FindByCondition(passage => passage.LicensePlateNumber == request.LicensePlateNumber
+                                        && passage.PassageDateTime <= request.UntilDateTime
                                         && passage.VehiclePassageInvoice == null);
 
         return new Response<IEnumerable<GetVehiclePassageDto>>(uninvoicedPassages.Select(passage => passage.AsDto()));

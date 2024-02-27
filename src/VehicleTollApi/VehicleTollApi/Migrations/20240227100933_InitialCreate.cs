@@ -28,7 +28,9 @@ namespace VehicleTollApi.Migrations
                 name: "VehiclePassageInvoice",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Amount = table.Column<decimal>(type: "TEXT", nullable: true),
+                    InvoiceDateTime = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,7 +43,8 @@ namespace VehicleTollApi.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     LicensePlateNumber = table.Column<string>(type: "TEXT", nullable: false),
-                    VehicleOwnerId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    VehicleKind = table.Column<int>(type: "INTEGER", nullable: false),
+                    VehicleOwnerId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +53,8 @@ namespace VehicleTollApi.Migrations
                         name: "FK_Vehicle_VehicleOwner_VehicleOwnerId",
                         column: x => x.VehicleOwnerId,
                         principalTable: "VehicleOwner",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +64,7 @@ namespace VehicleTollApi.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     LicensePlateNumber = table.Column<string>(type: "TEXT", nullable: true),
                     PassageDateTime = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
-                    VehiclePassageInvoiceId = table.Column<Guid>(type: "TEXT", nullable: true)
+                    VehiclePassageInvoiceId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,7 +73,8 @@ namespace VehicleTollApi.Migrations
                         name: "FK_VehiclePassage_VehiclePassageInvoice_VehiclePassageInvoiceId",
                         column: x => x.VehiclePassageInvoiceId,
                         principalTable: "VehiclePassageInvoice",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

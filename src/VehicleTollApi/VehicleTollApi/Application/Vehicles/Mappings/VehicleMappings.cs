@@ -12,7 +12,7 @@ public static class VehicleMappings
         {
             return null!;
         }
-        return new GetVehicleDto(vehicle.LicensePlateNumber!);
+        return new GetVehicleDto(vehicle.Id, vehicle.VehicleOwnerId, vehicle.LicensePlateNumber!, vehicle.VehicleKind);
     }
 
     public static CreateVehicleDto AsNewDto(this Vehicle vehicle, Guid ownerId)
@@ -21,14 +21,16 @@ public static class VehicleMappings
         {
             return null!;
         }
-        return new CreateVehicleDto(vehicle.Id, ownerId, vehicle.LicensePlateNumber!);
+        return new CreateVehicleDto(vehicle.Id, ownerId, vehicle.LicensePlateNumber!, vehicle.VehicleKind);
     }
 
     public static Vehicle AsModel(this CreateVehicleCommand vehicleCommand)
     {
         return new Vehicle()
         {
+            VehicleOwnerId = vehicleCommand.OwnerId,
             LicensePlateNumber = vehicleCommand.LicencePlateNumber,
+            VehicleKind = vehicleCommand.VehicleKind,
         };
     }
 }

@@ -3,4 +3,4 @@
 namespace VehicleTollApi.WebApi.Models;
 
 
-public record VehicleDTO(Guid Owner, string LicensePlate, VehicleKind VehicleKind);
+public record VehicleDTO(Guid OwnerId, string LicensePlate, VehicleKind VehicleKind);

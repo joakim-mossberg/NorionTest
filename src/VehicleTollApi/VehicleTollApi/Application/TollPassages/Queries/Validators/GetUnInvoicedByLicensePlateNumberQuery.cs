@@ -8,5 +8,6 @@ public class GetUnInvoicedByLicensePlateNumberQueryValidator : AbstractValidator
     public GetUnInvoicedByLicensePlateNumberQueryValidator()
     {
         RuleFor(vp => vp.LicensePlateNumber).MinimumLength(1).MaximumLength(10);
+        RuleFor(vp => vp.UntilDateTime).NotEmpty();
     }
 }

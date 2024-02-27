@@ -11,7 +11,7 @@ using VehicleTollApi.Infrastructure.Persistence.Data;
 namespace VehicleTollApi.Migrations
 {
     [DbContext(typeof(VehicleTollContext))]
-    [Migration("20240227071656_InitialCreate")]
+    [Migration("20240227100933_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -30,7 +30,10 @@ namespace VehicleTollApi.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("VehicleOwnerId")
+                    b.Property<int>("VehicleKind")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("VehicleOwnerId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -71,7 +74,7 @@ namespace VehicleTollApi.Migrations
                     b.Property<DateTimeOffset>("PassageDateTime")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("VehiclePassageInvoiceId")
+                    b.Property<Guid>("VehiclePassageInvoiceId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -87,6 +90,12 @@ namespace VehicleTollApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<decimal?>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("InvoiceDateTime")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("VehiclePassageInvoice");
@@ -96,7 +105,9 @@ namespace VehicleTollApi.Migrations
                 {
                     b.HasOne("VehicleTollApi.Infrastructure.Persistence.Models.VehicleOwner", "VehicleOwner")
                         .WithMany("Vehicles")
-                        .HasForeignKey("VehicleOwnerId");
+                        .HasForeignKey("VehicleOwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("VehicleOwner");
                 });
@@ -105,7 +116,9 @@ namespace VehicleTollApi.Migrations
                 {
                     b.HasOne("VehicleTollApi.Infrastructure.Persistence.Models.VehiclePassageInvoice", "VehiclePassageInvoice")
                         .WithMany("VehiclePassages")
-                        .HasForeignKey("VehiclePassageInvoiceId");
+                        .HasForeignKey("VehiclePassageInvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("VehiclePassageInvoice");
                 });

@@ -19,35 +19,43 @@ public class VehiclesController : ControllerBase
     public async Task<ActionResult<IEnumerable<VehicleDTO>>> GetAllVehicles()
     {
         var result = await _mediator.Send(new GetAllVehiclesQuery());
-        return Ok(result);
+        if (!result.IsValidResponse)
+        {
+            return BadRequest(result.Errors);
+        }
+        return Ok(result.Result);
     }
 
     [HttpGet("licenseplatenumber")]
     public async Task<ActionResult<VehicleDTO>> GetVehicleByLicensePlate(string licensePlateNumber, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new GetVehiclesByLicensePlateQuery(licensePlateNumber), cancellationToken);
-        return Ok(result);
+        if (!result.IsValidResponse)
+        {
+            return BadRequest(result.Errors);
+        }
+        return Ok(result.Result);
     }
 
     [HttpPost("newvehicle")]
-    public async Task<ActionResult<VehicleDTO>> CreateVehicle([FromBody]VehicleDTO vehicle, CancellationToken cancellationToken)
+    public async Task<ActionResult<NewVehicleDTO>> CreateVehicle([FromBody]NewVehicleDTO vehicle, CancellationToken cancellationToken)
     {
-        var ownerResult = await _mediator.Send(new GetVehicleOwnerByLicensePlateQuery(vehicle.LicensePlate), cancellationToken);
+        var ownerResult = await _mediator.Send(new GetVehicleOwnerByIdQuery(vehicle.OwnerId), cancellationToken);
         if(!ownerResult.IsValidResponse)
         {
             return BadRequest(ownerResult.Errors);
         }
         if(ownerResult.Result is null)
         {
-            return BadRequest($"No owner found for vehicle: {vehicle.LicensePlate}");
+            return BadRequest($"No owner found for Id: {vehicle.OwnerId}");
         }
         var owner = ownerResult.Result;
         var result = await _mediator.Send(new CreateVehicleCommand(owner.Id, vehicle.LicensePlate, vehicle.VehicleKind), cancellationToken);
-        if(result.IsValidResponse)
+        if(!result.IsValidResponse)
         {
             return BadRequest(result.Errors);
         }
         var newVehicle = result.Result;
-        return CreatedAtAction(nameof(CreateVehicle), new { licensePlateNumber = newVehicle.LicensePlateNumber }, new { Id = newVehicle.LicensePlateNumber, newVehicle });
+        return CreatedAtAction(nameof(GetVehicleByLicensePlate), new { licensePlateNumber = newVehicle.LicensePlateNumber }, new { Id = newVehicle.LicensePlateNumber, newVehicle });
     }
 }

@@ -9,5 +9,7 @@ public class VehiclePassage
     public Guid Id { get; set; }
     public string? LicensePlateNumber { get; set; }
     public DateTimeOffset PassageDateTime { get; set; }
+    [ForeignKey(nameof(VehiclePassageInvoice))]
+    public Guid VehiclePassageInvoiceId { get; set; }
     public VehiclePassageInvoice? VehiclePassageInvoice { get; set; }
 }

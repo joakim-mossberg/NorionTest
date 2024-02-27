@@ -9,16 +9,16 @@ namespace VehicleTollApi.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class TollPassagesController : ControllerBase
+public class VehiclePassagesController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public TollPassagesController(IMediator mediator) => _mediator = mediator;
+    public VehiclePassagesController(IMediator mediator) => _mediator = mediator;
 
-    [HttpGet("licenseplatenumber")]
-    public async Task<IActionResult> GetUnInvoicedByLicensePlateNumber(string licensePlateNumber, CancellationToken cancellationToken)
+    [HttpGet]
+    public async Task<IActionResult> GetUnInvoicedByLicensePlateNumber([FromQuery]string licensePlateNumber, [FromQuery]DateTimeOffset untilDateTime, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new GetUnInvoicedByLicensePlateNumberQuery(licensePlateNumber), cancellationToken);
+        var result = await _mediator.Send(new GetUnInvoicedByLicensePlateNumberQuery(licensePlateNumber, untilDateTime), cancellationToken);
         if (!result.IsValidResponse)
         {
             return BadRequest(result.Errors);
