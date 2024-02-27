@@ -3,9 +3,9 @@ using VehicleTollApi.Application.VehicleOwners.Queries.Handlers;
 
 namespace VehicleTollApi.Application.VehicleOwners.Commands.Validators;
 
-public sealed class GetAllVehicleOwnersQueryValidator : AbstractValidator<GetAllVehicleOwnersQuery>
+public sealed class CreateVehicleCommandValidator : AbstractValidator<GetAllVehicleOwnersQuery>
 {
-    public GetAllVehicleOwnersQueryValidator()
+    public CreateVehicleCommandValidator()
     {
     }
 }

@@ -28,6 +28,7 @@ public class CreateVehicleOwnerHandler : IRequestHandler<CreateVehicleOwnerComma
 
         var newVehicleOwner = request.AsModel();
         _repositoryWrapper.VehicleOwner.Create(newVehicleOwner);
+        _repositoryWrapper.Save();
 
         return new Response<CreateVehicleOwnerDto>(newVehicleOwner.AsNewDto());
     }

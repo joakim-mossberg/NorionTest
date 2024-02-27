@@ -20,15 +20,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Application\TollPassages\Queries\Handlers\" />
-        <Folder Include="Application\TollPassages\Queries\Validators\" />
         <Folder Include="Application\VehiclePassageInvoices\Commands\Handlers\" />
         <Folder Include="Application\VehiclePassageInvoices\Commands\Validators\" />
         <Folder Include="Application\VehiclePassageInvoices\Mappings\" />
         <Folder Include="Application\VehiclePassageInvoices\Queries\Handlers\" />
         <Folder Include="Application\VehiclePassageInvoices\Queries\Validators\" />
-        <Folder Include="Application\Vehicles\Commands\Validators\" />
-        <Folder Include="Application\Vehicles\Queries\Validators\" />
         <Folder Include="Migrations\" />
         <Folder Include="Database\" />
     </ItemGroup>

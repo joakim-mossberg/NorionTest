@@ -1,14 +1,6 @@
-﻿namespace VehicleTollApi.WebApi.Models;
+﻿using VehicleTollApi.Shared.Enums;
 
-public enum VehicleKind
-{
-    Motorbike = 0,
-    Tractor = 1,
-    Emergency = 2,
-    Diplomat = 3,
-    Foreign = 4,
-    Military = 5,
-    Car = 6,
-}
+namespace VehicleTollApi.WebApi.Models;
+
 
 public record VehicleDTO(Guid Owner, string LicensePlate, VehicleKind VehicleKind);

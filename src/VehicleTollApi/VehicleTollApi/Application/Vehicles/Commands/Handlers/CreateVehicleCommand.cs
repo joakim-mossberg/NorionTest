@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using VehicleTollApi.Shared;
-using VehicleTollApi.WebApi.Models;
+using VehicleTollApi.Shared.Enums;
 
 namespace VehicleTollApi.Application.Vehicles.Commands.Handlers;
 

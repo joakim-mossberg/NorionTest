@@ -18,13 +18,21 @@ public class VehicleOwnersController : ControllerBase
     public async Task<ActionResult<IEnumerable<VehicleOwnerDTO>>> GetAllVehicleOwners(CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new GetAllVehicleOwnersQuery(), cancellationToken);
-        return Ok(result);
+        return Ok(result.Result);
+    }
+
+    [HttpGet("id")]
+    public async Task<IActionResult> GetVehicleOwner(Guid id, CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(new GetVehicleOwnerByIdQuery(id), cancellationToken);
+        return Ok(result.Result);
     }
 
     [HttpPost("newowner")]
-    public async Task<IActionResult> CreateVehicleOwner([FromBody]VehicleOwnerDTO vehicleOwner, CancellationToken cancellationToken)
+    public async Task<ActionResult<VehicleOwnerDTO>> CreateVehicleOwner([FromBody]NewVehicleOwnerDTO vehicleOwner, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new CreateVehicleOwnerCommand(vehicleOwner.FirstName, vehicleOwner.LastName), cancellationToken);
-        return Ok(result);
+        var newOwner = result.Result;
+        return CreatedAtAction(nameof(GetVehicleOwner), new { id = newOwner.Id }, new { Id = newOwner.Id, newOwner });
     }
 }

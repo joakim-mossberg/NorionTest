@@ -1,3 +1,3 @@
 ﻿namespace VehicleTollApi.Application.TollPassages.Commands.Handlers;
 
-public record AddVehiclePassageDto(string LicensePlateNumber, DateTimeOffset passageTime);
+public record AddVehiclePassageDto(Guid Id, string LicensePlateNumber, DateTimeOffset passageTime);

@@ -29,7 +29,8 @@ public class AddVehiclePassageHandler : IRequestHandler<AddVehiclePassageCommand
 
         var newVehiclePassage = request.AsModel();
         _repositoryWrapper.VehiclePassage.Create(newVehiclePassage);
+        _repositoryWrapper.Save();
 
-        return new Response<AddVehiclePassageDto>(newVehiclePassage.AsDto());
+        return new Response<AddVehiclePassageDto>(newVehiclePassage.AsNewDto());
     }
 }

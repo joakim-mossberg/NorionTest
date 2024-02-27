@@ -8,4 +8,5 @@ public interface IRepositoryWrapper
     IVehicleRepository Vehicle { get; }
     IVehiclePassageRepository VehiclePassage { get; }
     IVehiclePassageInvoiceRepository VehiclePassageInvoice { get; }
+    void Save();
 }

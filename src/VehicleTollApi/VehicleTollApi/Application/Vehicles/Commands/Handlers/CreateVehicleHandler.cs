@@ -28,6 +28,7 @@ public class CreateVehicleHandler : IRequestHandler<CreateVehicleCommand, Respon
 
         var vehicle = request.AsModel();
         _repositoryWrapper.Vehicle.Create(vehicle);
+        _repositoryWrapper.Save();
         return new Response<CreateVehicleDto>(vehicle.AsNewDto(request.OwnerId));
     }
 }
