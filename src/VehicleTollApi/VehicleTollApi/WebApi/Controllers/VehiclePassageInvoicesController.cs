@@ -78,6 +78,8 @@ public class VehiclePassageInvoicesController : ControllerBase
             return BadRequest(passagesResult.Errors);
         }
 
-        return CreatedAtAction(nameof(GetVehiclePassageByIdInvoices), new { id = invoice.Id }, new { Id = invoice.Id, invoice });
+        var createdInvoice = result.Result;
+
+        return CreatedAtAction(nameof(GetVehiclePassageByIdInvoices), new { id = createdInvoice.Id}, new { Id = createdInvoice.Id, createdInvoice });
     }
 }

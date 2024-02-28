@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Routing.Constraints;
 using System.Runtime.InteropServices;
+using VehicleTollApi.Application.VehiclePassageInvoices.Mappings;
 using VehicleTollApi.Infrastructure.Persistence;
 using VehicleTollApi.Infrastructure.Persistence.Models;
 using VehicleTollApi.Shared;
@@ -42,6 +43,8 @@ public class CreateVehiclePassageInvoiceHandler : IRequestHandler<CreateVehicleP
         _repositoryWrapper.VehiclePassage
             .ExecuteUpdatePassages(passage => passageIds.Contains(passage.Id), newInvoice.Id);
         _repositoryWrapper.Save();
+
+        return new Response<CreatedVehiclePassageInvoiceDto>(newInvoice.AsNewDto());
     }
 
     private decimal CalculateTollFeeToBeInvoiced(CreateVehiclePassageInvoiceCommand request)
