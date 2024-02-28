@@ -119,7 +119,7 @@ public class CreateVehiclePassageInvoiceHandler : IRequestHandler<CreateVehicleP
 
         if (month == 7) return true;
 
-        if (year == 2013)
+        if (year == 2024)
         {
             if (month == 1 && day == 1 ||
                 month == 3 && (day == 28 || day == 29) ||
