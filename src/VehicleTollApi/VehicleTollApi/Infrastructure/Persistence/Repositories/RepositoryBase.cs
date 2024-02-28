@@ -11,6 +11,7 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     public RepositoryBase(VehicleTollContext repositoryContext)
     {
         RepositoryContext = repositoryContext;
+        RepositoryContext.VehiclePassages.ExecuteUpdate(s => s.SetProperty());
     }
     public IQueryable<T> FindAll() => RepositoryContext.Set<T>().AsNoTracking();
     public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) =>
